@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin/style.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/fonts/fontawesome/css/fontawesome-all.css') }}">
+    <script src="{{ asset('vendor/jquery/jquery-3.3.1.min.js') }}"></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -43,7 +44,15 @@
                                 <div class="nav-user-info">
                                     <h5 class="mb-0 text-white nav-user-name">{{ Auth::user()->name }}</h5>
                                 </div>
-                                <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>Logout</a>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
                             </div>
                         </li>
                     </ul>
@@ -89,6 +98,7 @@
                                 <a class="nav-link" href="{{ url('admin/categories') }}"><i class="fas fa-fw fa-table"></i>Categories</a>
                             </li>
                            
+                           @if(Auth::user()->isAdmin())
                            
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5">
@@ -108,7 +118,7 @@
                             <li class="nav-item">
                                     <a class="nav-link" href="#{{ url('admin/site') }}"><i class="fa fa-fw fa-rocket"></i>Site</a>
                             </li>
-
+                            @endif
                         </ul>
                     </div>
                 </nav>
@@ -131,7 +141,6 @@
 
     </div>
 
-    <script src="{{ asset('vendor/jquery/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.js') }}"></script>
     <script src="{{ asset('public/js/scripts.js') }}"></script>
 </body>

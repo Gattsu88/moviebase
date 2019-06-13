@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Category;
+use App\Post;
+use App\Photo;
+use Session;
+use Auth;
+use App\Http\Requests\CreatePostRequest;
 
 class AdminPostsController extends Controller
 {
@@ -18,7 +24,9 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
-        return view('admin.posts.index');
+        $posts = Post::orderBy('id', 'desc')->paginate(5);
+
+        return view('admin.posts.index', compact('posts'));
     }
 
     /**
@@ -28,7 +36,9 @@ class AdminPostsController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = Category::all();
+
+        return view('admin.posts.create', compact('categories'));
     }
 
     /**
@@ -37,9 +47,24 @@ class AdminPostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreatePostRequest $request)
     {
-        //
+        $input  = $request->all();
+
+        if($file =$request->file('file')) {
+            $name = time().$file->getClientOriginalName();
+            $file->move('images/posts', $name);
+            $image = Photo::create(['filename' => $name]);
+
+            $input['photo_id'] = $image->id;
+        }
+
+        $input['user_id'] = Auth::user()->id;
+
+        Post::create($input);
+        Session::flash('flash_admin', 'The post has been created.');
+
+        return redirect('admin/posts');
     }
 
     /**
@@ -61,7 +86,10 @@ class AdminPostsController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.posts.edit');
+        $post = Post::find($id);
+        $categories = Category::all();
+
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -73,7 +101,22 @@ class AdminPostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $input = $request->all();
+
+        if($file =$request->file('file')) {
+            $name = time().$file->getClientOriginalName();
+            $file->move('images/posts', $name);
+            $image = Photo::create(['filename' => $name]);
+
+            $input['photo_id'] = $image->id;
+        }
+
+        $post->update($input);
+
+        Session::flash('flash_admin', 'The post has been updated.');
+
+        return redirect('admin/posts');
     }
 
     /**
@@ -84,6 +127,10 @@ class AdminPostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id)->delete();
+
+        Session::flash('flash_admin', 'The post has been deleted.');
+
+        return redirect('admin/posts');
     }
 }
