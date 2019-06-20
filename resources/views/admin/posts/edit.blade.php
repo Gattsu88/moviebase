@@ -21,7 +21,7 @@
             @method('PATCH')
 
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-md-3">
                     <div class="form-group">
                         <label for="file">Movie cover</label>
                         <div>
@@ -31,31 +31,39 @@
                     </div>
                 </div>
 
-                <div class="col-sm-8">
+                <div class="col-md-8 offset-md-1">
+                    
+                    <div class="form-group">
+                        <label for="title">Post title</label>
+                        <input type="text" class="form-control" name="title" placeholder="Enter a title for the post.." value="{{ $post->title }}">
+                    </div>
 
                     <div class="form-group">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" name="name" placeholder="Enter a post title.." value="{{ $post->name }}">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="category_id">Category</label>
-                            <select name="category_id" id="" class="form-control">
-                                <option value="" disabled selected>Select category:</option>
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}" {{ $post->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="review">Review</label>
-                            <textarea class="form-control" name="review" id="article-ckeditor" cols="6" rows="10" width="295">{{ $post->review }}</textarea>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Edit post</button>
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" name="name" placeholder="Enter a post title.." value="{{ $post->name }}">
                     </div>
+
+                    <div class="form-group">
+                        <label for="category_id">Category</label>
+                        <select name="category_id" id="" class="form-control">
+                            <option value="" disabled selected>Select category:</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}" {{ $post->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" name="description" cols="6" rows="2" width="295">{{ $post->description }}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="review">Review</label>
+                        <textarea class="form-control" name="review" id="article-ckeditor" cols="6" rows="10" width="295">{{ $post->review }}</textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Edit post</button>
 
                     @component('admin.includes.form_errors')
                         Add Administrators / Authors

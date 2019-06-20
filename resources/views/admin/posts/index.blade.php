@@ -33,7 +33,7 @@
                             <img src="{{ url('/images/posts/'.$post->photo['filename']) }}" width="50px">
                         </td>
                         <td>
-                            <a href="{{ url('/admin/posts/'.$post->id).'/edit' }}">{{ $post->name }}</a>
+                            <a href="{{ url('/admin/posts/'.$post->id.'/edit') }}">{{ $post->name }}</a>
                         </td>
                         <td>{{ $post->category->name }}</td>
                         <td>{{ $post->user->name }}</td>

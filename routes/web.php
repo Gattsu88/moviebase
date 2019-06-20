@@ -16,6 +16,7 @@ Auth::routes();
 Route::group(['middleware' => ['is_active']], function() {
     Route::get('/admin', 'AdminController@index')->name('admin');
     Route::resources(['/admin/posts' => 'AdminPostsController']);
+    Route::resources(['/admin/categories' => 'AdminCategoriesController']);
 });
 
 Route::group(['middleware' => ['is_active', 'is_admin']], function() {
@@ -23,3 +24,4 @@ Route::group(['middleware' => ['is_active', 'is_admin']], function() {
 });
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/post/{id}', 'PostController@show')->name('post');

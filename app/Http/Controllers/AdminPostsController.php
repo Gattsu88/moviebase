@@ -51,7 +51,7 @@ class AdminPostsController extends Controller
     {
         $input  = $request->all();
 
-        if($file =$request->file('file')) {
+        if($file = $request->file('file')) {
             $name = time().$file->getClientOriginalName();
             $file->move('images/posts', $name);
             $image = Photo::create(['filename' => $name]);
@@ -64,7 +64,7 @@ class AdminPostsController extends Controller
         Post::create($input);
         Session::flash('flash_admin', 'The post has been created.');
 
-        return redirect('admin/posts');
+        return redirect('/admin/posts');
     }
 
     /**
