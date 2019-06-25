@@ -12,7 +12,7 @@ class Post extends Model
     use SluggableScopeHelpers;
 
     protected $fillable = [
-        'user_id', 'category_id', 'photo_id', 'name', 'review', 'title', 'description', 
+        'user_id', 'category_id', 'photo_id', 'name', 'review', 'title', 'description'
     ];
 
     public function sluggable()

@@ -7,9 +7,9 @@
                     <li class="nav-divider">
                         Menu
                     </li>
-                    <li class="nav-item">
+                    <!--<li class="nav-item">
                         <a class="nav-link" href="{{ url('/admin') }}"><i class="fa fa-fw fa-rocket"></i>Dashboard</a>
-                    </li>
+                    </li>-->
                     <li class="nav-item ">
                         <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1">
                             <i class="fas fa-fw fa-file"></i>Posts</a>
@@ -50,7 +50,7 @@
                     </li>
 
                     <li class="nav-item">
-                            <a class="nav-link" href="#{{ url('admin/site') }}"><i class="fa fa-fw fa-rocket"></i>Site</a>
+                            <a class="nav-link" href="{{ url('admin/site') }}"><i class="fa fa-fw fa-rocket"></i>Site</a>
                     </li>
                     @endif
                 </ul>

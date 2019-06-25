@@ -13,8 +13,14 @@
     @endif
 
     @include('admin.includes.search_form')
-    @include('admin.includes.post_list')
 
-    {{ $posts->links() }}
+    <a href="{{ url('/admin/posts') }}">See all posts</a>
+
+    @if($posts)
+        <div class="count">Posts founded: <strong>{{ count($posts) }}</strong></div>
+        @include('admin.includes.post_list')
+    @else
+        <div>Sorry, no posts found..</div>
+    @endif 
 
 @endsection

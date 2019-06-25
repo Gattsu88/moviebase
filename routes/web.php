@@ -17,6 +17,8 @@ Route::group(['middleware' => ['is_active']], function() {
     Route::get('/admin', 'AdminController@index')->name('admin');
     Route::resources(['/admin/posts' => 'AdminPostsController']);
     Route::resources(['/admin/categories' => 'AdminCategoriesController']);
+    Route::post('/admin/posts/filter', 'AdminPostsController@filter');
+    Route::resources(['/admin/site' => 'AdminSiteController']);
 });
 
 Route::group(['middleware' => ['is_active', 'is_admin']], function() {

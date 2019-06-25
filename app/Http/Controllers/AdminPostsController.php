@@ -133,4 +133,12 @@ class AdminPostsController extends Controller
 
         return redirect('admin/posts');
     }
+
+    public function filter(Request $request)
+    {
+        $posts = Post::where('name', 'like', '%'.$request->input('keywords').'%')->
+        orWhere('title', 'like', '%'.$request->input('keywords').'%')->get();
+
+        return view('admin.posts.search', compact('posts'));
+    }
 }

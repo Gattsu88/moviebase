@@ -59,7 +59,19 @@
                 @endif
             </div>
             <div class="col-md-4">
-
+                <div class="home_top_post_list">
+                    <h3>Popular reviews</h3>
+                    @if($topPosts)
+                        <div>
+                            @foreach($topPosts as $topPost)
+                                <a href="{{ url('/post/'.$topPost->slug) }}" class="item">
+                                    <div class="name">{{ $topPost->name }}</div>
+                                    <div class="title">{{ $topPost->title }}</div>
+                                </a>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
             </div>
         </div>
     </div>

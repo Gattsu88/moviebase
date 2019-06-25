@@ -21,6 +21,7 @@
                                 <tr>
                                     <td>{{ $category->id }}</td>
                                     <td>
+                                        <span class="badge badge-pill badge-danger pull-right">{{ $category->posts->count() }}</span>&nbsp;
                                         <a href="{{ url('admin/categories/'.$category->id.'/edit') }}">{{ $category->name }}</a>
                                     </td>
                                 </tr>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddPostsTitleDesc extends Migration
+class CreateSiteTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class AddPostsTitleDesc extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->string('title');
-            $table->text('description');
+        Schema::create('site', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('address');
+            $table->string('business_hours');
+            $table->string('phone');
+            $table->timestamps();
         });
     }
 
@@ -26,8 +29,6 @@ class AddPostsTitleDesc extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('site');
     }
 }

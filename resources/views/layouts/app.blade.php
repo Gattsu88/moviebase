@@ -28,6 +28,8 @@
         @include('includes.header')
 
         @yield('content')
+
+        @include('includes.footer')
     </div>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.js') }}"></script>
 </body>

@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Post;
+use App\Site;
+use Session;
 
-class PostController extends Controller
+class AdminSiteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $site = Site::find(1);
+
+        return view('admin.site.index', compact('site'));
     }
 
     /**
@@ -44,12 +47,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($id)
     {
-        $post = Post::findBySlugOrFail($slug);
-        $post->increment('views');
-
-        return view('posts.index', compact('post'));
+        //
     }
 
     /**
@@ -72,7 +72,11 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        Site::findOrFail(1)->update($input);
+
+        Session::flash('flash_admin', 'The site data has been updated');
+        return redirect('/admin/site');
     }
 
     /**

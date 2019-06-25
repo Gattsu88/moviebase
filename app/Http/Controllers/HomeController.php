@@ -26,7 +26,8 @@ class HomeController extends Controller
     {
         $postsSliders = Post::orderBy('id', 'desc')->take(8)->get();
         $posts = Post::orderBy('id', 'desc')->take(15)->skip(4)->get();
+        $topPosts = Post::orderBy('views', 'desc')->take(6)->get();
 
-        return view('home', compact('postsSliders', 'posts'));
+        return view('home', compact('postsSliders', 'posts', 'topPosts'));
     }
 }

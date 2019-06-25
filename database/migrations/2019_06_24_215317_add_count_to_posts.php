@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddPostsTitleDesc extends Migration
+class AddCountToPosts extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class AddPostsTitleDesc extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->string('title');
-            $table->text('description');
+            $table->integer('views');
         });
     }
 
